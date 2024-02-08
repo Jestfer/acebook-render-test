@@ -4,19 +4,15 @@ require("dotenv").config();
 const app = require("./app.js");
 const { connectToDatabase } = require("./db/db.js");
 
+console.log("Current working directory:", process.cwd());
+console.log("__dirname is:", __dirname);
+
 const listenForRequests = () => {
   const port = process.env.PORT || 3000;
   app.listen(port, () => {
     console.log("Now listening on port", port);
   });
 };
-
-// if (process.env.NODE_ENV === 'production') {
-//   //*Set static folder up in production
-//   app.use(express.static('client/build'));
-
-//   app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'client', 'build','index.html')));
-// }
 
 connectToDatabase().then(() => {
   listenForRequests();

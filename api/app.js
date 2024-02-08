@@ -53,16 +53,13 @@ app.use((err, _req, res, _next) => {
 
 if (process.env.NODE_ENV === "production") {
   //*Set static folder up in production
-  // app.use(express.static("frontend/dist"));
-
-  // app.get("*", (req, res) =>
-  //   res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"))
-  // );
-
+  console.log("Setting up static files from:", path.resolve(__dirname, '../frontend/dist'));
   app.use(express.static(path.resolve(__dirname, '../frontend/dist')));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+    const indexPath = path.resolve(__dirname, "../frontend/dist/index.html");
+    console.log("Attempting to send file from:", indexPath);
+    res.sendFile(indexPath);
   });
 }
 
