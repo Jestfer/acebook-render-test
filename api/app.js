@@ -53,11 +53,17 @@ app.use((err, _req, res, _next) => {
 
 if (process.env.NODE_ENV === "production") {
   //*Set static folder up in production
-  app.use(express.static("frontend/dist"));
+  // app.use(express.static("frontend/dist"));
 
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"))
-  );
+  // app.get("*", (req, res) =>
+  //   res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"))
+  // );
+
+  app.use(express.static(path.resolve(__dirname, '../frontend/dist')));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+  });
 }
 
 module.exports = app;
